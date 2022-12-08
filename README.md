@@ -58,3 +58,5 @@ cert_hosts:
 ```
 # ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags addons
 ```
+
+## 5、鸣谢 阿良老师
