@@ -5,13 +5,14 @@
 下载Ansible部署文件：
 
 ```
-# git clone https://github.com/lizhenliang/ansible-install-k8s
+# git clone --branch v1.23 https://github.com/lizhenliang/ansible-install-k8s
 # cd ansible-install-k8s
 ```
 
 下载软件包并解压/root目录：
 
-云盘地址：https://pan.baidu.com/s/1lTXolmlcCJbei9HY2BJRPQ
+云盘地址：链接：https://pan.baidu.com/s/1RWlnabDvbkjkfjoZ7-F8xA 
+提取码：jwqc
 ```
 # tar zxf binary_pkg.tar.gz
 ```
@@ -40,14 +41,24 @@ cert_hosts:
 多Master架构
 ![avatar](https://github.com/lizhenliang/ansible-install-k8s/blob/master/multi-master.jpg)
 ### 部署命令
-单Master版：
+#### 单Master版：
+a、升级kernel
 ```
-# ansible-playbook -i hosts single-master-deploy.yml -uroot -k
+# ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags common
 ```
-多Master版：
+b、部署其他
 ```
-# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k
+ansible-playbook -i hosts single-master-deploy.yml -uroot -k --skip-tags common
 ```
+#### 多Master版：
+a、升级kernel
+```
+# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --tags common
+```
+b、部署其他
+```
+# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --skip-tags common
+``
 
 ## 4、部署控制
 如果安装某个阶段失败，可针对性测试.
