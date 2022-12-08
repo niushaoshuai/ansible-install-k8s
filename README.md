@@ -63,7 +63,7 @@ ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --skip-tags common
 ## 4、部署控制
 如果安装某个阶段失败，可针对性测试.
 
-例如：只运行部署插件
+#### 例如：只运行部署插件
 ```
 ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags addons
 ```
