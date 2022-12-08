@@ -1,11 +1,11 @@
-# Kubernetes v1.16 高可用集群自动部署（离线版）
+# Kubernetes v1.25 高可用集群自动部署（离线版）
 >### 确保所有节点系统时间一致
 ### 1、下载所需文件
 
 下载Ansible部署文件：
 
 ```
-# git clone --branch v1.25 https://github.com/lizhenliang/ansible-install-k8s
+# git clone --branch v1.25 https://github.com/niushaoshuai/ansible-install-k8s
 # cd ansible-install-k8s
 ```
 
