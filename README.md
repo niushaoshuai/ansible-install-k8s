@@ -44,7 +44,7 @@ cert_hosts:
 #### 单Master版：
 a、升级kernel
 ```
-# ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags common
+ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags common
 ```
 b、部署其他
 ```
@@ -53,11 +53,11 @@ ansible-playbook -i hosts single-master-deploy.yml -uroot -k --skip-tags common
 #### 多Master版：
 a、升级kernel
 ```
-# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --tags common
+ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --tags common
 ```
 b、部署其他
 ```
-# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --skip-tags common
+ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --skip-tags common
 ``
 
 ## 4、部署控制
@@ -65,5 +65,5 @@ b、部署其他
 
 例如：只运行部署插件
 ```
-# ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags addons
+ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags addons
 ```
