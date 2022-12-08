@@ -14,8 +14,8 @@
 
 [lb]
 # 如果部署单Master，该项忽略
-192.168.101.35 lb_name=lb-master
-192.168.101.36 lb_name=lb-backup
+#192.168.101.35 lb_name=lb-master
+#192.168.101.36 lb_name=lb-backup
 
 [k8s:children]
 master

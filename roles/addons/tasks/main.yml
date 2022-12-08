@@ -1,7 +1,7 @@
 ---
-- name: 允许Node加入集群
-  ignore_errors: yes
-  shell: kubectl certificate approve $(kubectl get csr |awk 'NR!=1{print $1}')
+#- name: 允许Node加入集群
+#  ignore_errors: yes
+#  shell: kubectl certificate approve $(kubectl get csr |awk 'NR!=1{print $1}')
 
 - name: 拷贝YAML文件到Master
   copy: src={{ item }} dest={{ tmp_dir }}

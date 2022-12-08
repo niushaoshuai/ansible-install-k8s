@@ -26,9 +26,9 @@
   tasks:
     - template: src=roles/common/templates/hostsall.j2 dest=/etc/hosts
 
-- name: 4.允许NewNode加入集群
-  gather_facts: false
-  ignore_errors: yes
-  hosts: master
-  tasks:
-    - shell: kubectl certificate approve $(kubectl get csr |awk '$NF~/Pending/{print $1}')
+#- name: 4.允许NewNode加入集群
+#  gather_facts: false
+#  ignore_errors: yes
+#  hosts: master
+#  tasks:
+#    - shell: kubectl certificate approve $(kubectl get csr |awk '$NF~/Pending/{print $1}')
