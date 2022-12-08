@@ -58,7 +58,7 @@ ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --tags common
 b、部署其他
 ```
 ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --skip-tags common
-``
+```
 
 ## 4、部署控制
 #### 如果安装某个阶段失败，可针对性测试.
