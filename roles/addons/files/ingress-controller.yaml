@@ -324,7 +324,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
         - name: controller
-          image: niushaoshuai/nginx-ingress-controller:0.30.0
+          image: niushaoshuai/ingress-nginx-controller:v1.1.0
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
@@ -605,7 +605,7 @@ spec:
     spec:
       containers:
         - name: create
-          image: lizhenliang/kube-webhook-certgen:v1.1.1
+          image: niushaoshuai/kube-webhook-certgen:v1.1.1
           imagePullPolicy: IfNotPresent
           args:
             - create
@@ -657,7 +657,7 @@ spec:
     spec:
       containers:
         - name: patch
-          image: lizhenliang/kube-webhook-certgen:v1.1.1
+          image: niushaoshuai/kube-webhook-certgen:v1.1.1
           imagePullPolicy: IfNotPresent
           args:
             - patch

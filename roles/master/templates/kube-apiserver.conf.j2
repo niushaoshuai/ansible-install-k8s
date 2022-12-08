@@ -1,18 +1,15 @@
 {% set local_ip = inventory_hostname %}
 KUBE_APISERVER_OPTS="--logtostderr=false \
---v=4 \
+--v=2 \
 --log-dir={{ k8s_work_dir }}/logs \
 --etcd-servers={% for host in groups['etcd'] %}https://{{ hostvars[host].inventory_hostname }}:2379{% if not loop.last %},{% endif %}{% endfor %} \
 --bind-address={{ local_ip }} \
 --secure-port=6443 \
 --advertise-address={{ local_ip }} \
---insecure-port=0 \
 --allow-privileged=true \
 --service-cluster-ip-range={{ service_cidr }} \
---enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
---anonymous-auth=false \
+--enable-admission-plugins=NodeRestriction \
 --authorization-mode=RBAC,Node \
---runtime-config=api/all=true \
 --enable-bootstrap-token-auth=true \
 --token-auth-file={{ k8s_work_dir }}/cfg/token.csv \
 --service-node-port-range={{ service_nodeport_range }} \
@@ -22,12 +19,19 @@ KUBE_APISERVER_OPTS="--logtostderr=false \
 --tls-private-key-file={{ k8s_work_dir }}/ssl/server-key.pem \
 --client-ca-file={{ k8s_work_dir }}/ssl/ca.pem \
 --service-account-key-file={{ k8s_work_dir }}/ssl/ca-key.pem \
---service-account-signing-key-file={{ k8s_work_dir }}/ssl/ca-key.pem  \
---service-account-issuer=https://kubernetes.default.svc.cluster.local \
 --etcd-cafile={{ k8s_work_dir }}/ssl/etcd/ca.pem \
 --etcd-certfile={{ k8s_work_dir }}/ssl/etcd/server.pem \
 --etcd-keyfile={{ k8s_work_dir }}/ssl/etcd/server-key.pem \
---enable-swagger-ui=true \
+--service-account-issuer=api \
+--service-account-signing-key-file={{ k8s_work_dir }}/ssl/ca-key.pem \
+--requestheader-client-ca-file={{ k8s_work_dir }}/ssl/ca.pem \
+--proxy-client-cert-file={{ k8s_work_dir }}/ssl/server.pem \
+--proxy-client-key-file={{ k8s_work_dir }}/ssl/server-key.pem \
+--requestheader-allowed-names=kubernetes \
+--requestheader-extra-headers-prefix=X-Remote-Extra- \
+--requestheader-group-headers=X-Remote-Group \
+--requestheader-username-headers=X-Remote-User \
+--enable-aggregator-routing=true \
 --audit-log-maxage=30 \
 --audit-log-maxbackup=3 \
 --audit-log-maxsize=100 \

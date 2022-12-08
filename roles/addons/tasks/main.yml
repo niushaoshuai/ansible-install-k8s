@@ -8,18 +8,11 @@
   with_fileglob:
     - "*.yaml"
 
-- name: 部署Flannel,Dashboard,CoreDNS,Ingress
+- name: 部署Calico,Dashboard,CoreDNS,Ingress
   ignore_errors: yes
   shell: |
          cd {{ tmp_dir }}
          for yaml in $(ls *.yaml);do kubectl apply -f $yaml;done
-
-- name: 替换Dashboard证书
-  shell: |
-         kubectl delete secret kubernetes-dashboard-certs -n kubernetes-dashboard |true
-         kubectl create secret generic kubernetes-dashboard-certs \
-         --from-file={{ k8s_work_dir }}/ssl/server-key.pem --from-file={{ k8s_work_dir }}/ssl/server.pem -n kubernetes-dashboard
-         kubectl apply -f {{ tmp_dir }}/kubernetes-dashboard.yaml
 
 - name: 查看Pod状态
   shell: kubectl get all --all-namespaces
@@ -36,8 +29,7 @@
   ignore_errors: yes
   shell: |
          web='https://NodeIP:30001'
-         token=$(kubectl describe secrets -n kubernetes-dashboard \
-         $(kubectl get secret -n kubernetes-dashboard | awk '/dashboard-admin/{print $1}') |awk '/^token/{print $2}')
+         token=$(kubectl create token dashboard-admin -n kubernetes-dashboard)
          echo "访问地址--->$web"
          echo "令牌内容--->$token" 
   register: ui

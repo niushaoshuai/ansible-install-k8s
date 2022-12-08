@@ -41,13 +41,24 @@ cert_hosts:
 ![avatar](https://github.com/lizhenliang/ansible-install-k8s/blob/master/multi-master.jpg)
 ### 部署命令
 单Master版：
+a、升级kernel
 ```
-# ansible-playbook -i hosts single-master-deploy.yml -uroot -k
+# ansible-playbook -i hosts single-master-deploy.yml -uroot -k --tags common
+```
+b、部署其他
+```
+ansible-playbook -i hosts single-master-deploy.yml -uroot -k --skip-tags common
 ```
 多Master版：
+a、升级kernel
 ```
-# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k
+# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --tags common
 ```
+b、部署其他
+```
+# ansible-playbook -i hosts multi-master-deploy.yml -uroot -k --skip-tags common
+```
+
 
 ## 4、部署控制
 如果安装某个阶段失败，可针对性测试.
