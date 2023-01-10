@@ -3,4 +3,8 @@ KUBE_SCHEDULER_OPTS="--logtostderr=false \
 --log-dir={{ k8s_work_dir }}/logs \
 --leader-elect \
 --kubeconfig={{ k8s_work_dir }}/cfg/kube-scheduler.kubeconfig \
---bind-address=127.0.0.1"
+--authentication-kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
+--authorization-kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
+--tls-cert-file=/opt/kubernetes/ssl/admin.pem \
+--tls-private-key-file=/opt/kubernetes/ssl/admin-key.pem \
+--bind-address=0.0.0.0"
