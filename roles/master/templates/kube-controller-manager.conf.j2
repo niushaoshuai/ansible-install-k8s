@@ -3,7 +3,11 @@ KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=false \
 --log-dir={{ k8s_work_dir }}/logs \
 --leader-elect=true \
 --kubeconfig={{ k8s_work_dir }}/cfg/kube-controller-manager.kubeconfig \
---bind-address=127.0.0.1 \
+--authentication-kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
+--authorization-kubeconfig=/opt/kubernetes/cfg/kube-controller-manager.kubeconfig \
+--tls-cert-file=/opt/kubernetes/ssl/admin.pem \
+--tls-private-key-file=/opt/kubernetes/ssl/admin-key.pem \
+--bind-address=0.0.0.0 \
 --allocate-node-cidrs=true \
 --cluster-cidr={{ pod_cidr }} \
 --service-cluster-ip-range={{ service_cidr }} \
